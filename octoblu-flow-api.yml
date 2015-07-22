@@ -1,0 +1,62 @@
+swagger: '2.0'
+info:
+  title: Octoblu Flow API
+  description: Control your Octoblu Flows with this API
+  version: '1.1.6'
+host: app.octoblu.com
+schemes:
+  - https
+basePath: /api
+produces:
+  - application/json
+  - text/plain
+paths:
+  /flows:
+    post:
+      description: Create a new flow
+      responses:
+        201:
+          description: Flow created
+        422:
+          description: An error has occured, check the console
+  /flows/:flowId:
+    put:
+      description: Start(deploy) a flow
+      parameters:
+        - name: flowId
+          in: URL
+          description: The Id of your flow
+          required: true
+          type: String
+      responses:
+        204:
+          description: Flow start(deploy) succeeded
+        422:
+          description: An error has occured, check the console
+    delete:
+      description: Delete a flow
+      parameters:
+        - name: flowId
+          in: URL
+          description: The Id of your flow
+          required: true
+          type: String
+      responses:
+        204:
+          description: Flow deletion succeeded
+        500:
+          description: An error has occured, check the console
+  /flows/:flowId/instance:
+    delete:
+      description: Stop a flow
+      parameters:
+        - name: flowId
+          in: URL
+          description: The Id of your flow
+          required: true
+          type: String
+      responses:
+        200:
+          description: Flow stop succeeded
+        500:
+          description: An error has occured, check the console
